@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 
-import {KickassService} from '../services/kickass.service';
+import {MovieService} from '../services/kickass.service';
 
 @Component({
 	selector: 'dashboard',
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
 	public loading = true;
 
 	constructor(
-		private _kickassService: KickassService
+		private _kickassService: MovieService
 	) {}
 
 	ngOnInit() {

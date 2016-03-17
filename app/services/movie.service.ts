@@ -1,12 +1,14 @@
-import {Injectable} from 'angular2/core';
+import {Injectable, OnInit} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 
 
 @Injectable()
-export class KickassService {
+export class MovieService implements OnInit {
 
 	public url = 'http://localhost:3000';
+	public apiKey = 'f289cf4b2326937e41e44f35b992964e';
 	public req_options: RequestOptions;
+	public config = [];
 
 	constructor(private _http: Http) {
 		let headers = new Headers({
@@ -18,6 +20,10 @@ export class KickassService {
 		this.req_options = new RequestOptions({
 			headers: headers
 		});
+	}
+
+	ngOnInit() {
+
 	}
 
 	getMovies(category: string, query: string = null) {
