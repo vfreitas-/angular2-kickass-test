@@ -1,44 +1,51 @@
 import {Injectable, OnInit} from 'angular2/core';
-import {Http, Headers, RequestOptions} from 'angular2/http';
+import {Http, Headers, RequestOptions, URLSearchParams} from 'angular2/http';
 
 
 @Injectable()
-export class MovieService implements OnInit {
+export class MovieService {
 
-	public url = 'http://localhost:3000';
+	public url = 'http://api.themoviedb.org/3';
 	public apiKey = 'f289cf4b2326937e41e44f35b992964e';
 	public req_options: RequestOptions;
-	public config = [];
+	public params: URLSearchParams;
+
+	public config = {
+		base_url: '',
+		poster_sizes: []
+	};
 
 	constructor(private _http: Http) {
-		let headers = new Headers({
-			'Content-Type': 'application/json',
-			'trakt-api-version': 2,
-			'trakt-api-key': '04ec3baf430aa0db990b5c57bc1b8f47af24b3e299c3c4d66e467a1d1201fe31'
-		});
+		this.params = new URLSearchParams();
+		this.params.set('api_key', this.apiKey);
+
+		let headers = new Headers({});
 
 		this.req_options = new RequestOptions({
-			headers: headers
+			headers: headers,
+			search: this.params
 		});
+
+		this.getConfiguration();
 	}
 
-	ngOnInit() {
-
+	getConfiguration() {
+		this._http.get(`${this.url}/configuration`, this.req_options)
+			.toPromise()
+			.then(result => {
+				let data = result.json();
+				this.config.base_url = data.images.base_url;
+				this.config.poster_sizes = data.images.poster_sizes;
+				console.log(this.config);
+			});
 	}
 
-	getMovies(category: string, query: string = null) {
-		let url = `${this.url}/search/${category}`;
-
-		if(query) url += `/${query}`;
-
-		return this._http.get(url)
+	getPopularMovies() {
+		return this._http.get(`${this.url}/movie/popular`, this.req_options)
 			.toPromise();
 	}
 
-	getTrendMovies() {
-		return this._http.get(
-			'https://api-v2launch.trakt.tv/movies/trending',
-			this.req_options
-		).toPromise();
+	renderPoster(poster_path: string) {
+		return `${this.config.base_url}${this.config.poster_sizes[3]}${poster_path}`;
 	}
 }

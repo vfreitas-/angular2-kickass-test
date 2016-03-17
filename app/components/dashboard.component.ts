@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 
-import {MovieService} from '../services/kickass.service';
+import {MovieService} from '../services/movie.service';
 
 @Component({
 	selector: 'dashboard',
@@ -13,15 +13,14 @@ import {MovieService} from '../services/kickass.service';
 					<div class="indeterminate"></div>
 				</div>
 			</div>
-			<div class="col s4" *ngFor="#movie of movies">
+			<div class="col s3" *ngFor="#movie of movies">
 				<div class="card blue">
 					<a>
 						<div class="card-image">
-							<img/>
-							<span class="card-title">{{ movie.movie.title }}</span>
-						</div>
-						<div>
-
+							<img [src]="getMovieImage(movie.poster_path)"/>
+							<span class="card-title txt-blue">
+								{{ movie.title }}
+							</span>
 						</div>
 					</a>
 				</div>
@@ -30,22 +29,24 @@ import {MovieService} from '../services/kickass.service';
 	`
 })
 export class DashboardComponent implements OnInit {
-	public movies = [];
+	public movies: any;
 	public loading = true;
 
 	constructor(
-		private _kickassService: MovieService
+		private _movieService: MovieService
 	) {}
 
 	ngOnInit() {
-		//this._kickassService.getMovies('movies')
-		this._kickassService.getTrendMovies()
-			.then(res => {
-				this.movies = res.json();
-
-
-
+		this._movieService.getPopularMovies()
+			.then(result => {
+				this.movies = result.json().results;
 				this.loading = false;
 			});
+	}
+
+	getMovieImage(poster_path: string) {
+		let path = this._movieService.renderPoster(poster_path);
+		console.log(path);
+		return path;
 	}
 }
