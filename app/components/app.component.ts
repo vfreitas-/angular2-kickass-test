@@ -6,8 +6,6 @@ import {KickassService} from '../services/kickass.service';
 import {HeaderComponent} from './header.component';
 import {DashboardComponent} from './dashboard.component';
 
-//import * as kat from 'node_modules/kickass-api/index.js';
-
 @Component({
 	selector: 'app',
 	directives: [ROUTER_DIRECTIVES, HeaderComponent],
