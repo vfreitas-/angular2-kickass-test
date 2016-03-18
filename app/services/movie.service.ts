@@ -36,12 +36,16 @@ export class MovieService {
 				let data = result.json();
 				this.config.base_url = data.images.base_url;
 				this.config.poster_sizes = data.images.poster_sizes;
-				console.log(this.config);
 			});
 	}
 
 	getPopularMovies() {
 		return this._http.get(`${this.url}/movie/popular`, this.req_options)
+			.toPromise();
+	}
+
+	getMovie(id: number) {
+		return this._http.get(`${this.url}/movie/${id}`, this.req_options)
 			.toPromise();
 	}
 

@@ -1,9 +1,11 @@
 import {Component, OnInit} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {MovieService} from '../services/movie.service';
 
 @Component({
 	selector: 'dashboard',
+	directives: [ROUTER_DIRECTIVES],
 	template: `
 		<h2>Dashboard</h2>
 
@@ -13,14 +15,12 @@ import {MovieService} from '../services/movie.service';
 					<div class="indeterminate"></div>
 				</div>
 			</div>
-			<div class="col s3" *ngFor="#movie of movies">
+			<div class="col s4 m3 l2" *ngFor="#movie of movies">
 				<div class="card blue">
-					<a>
+					<a [routerLink]="['Movie', {id: movie.id}]">
 						<div class="card-image">
 							<img [src]="getMovieImage(movie.poster_path)"/>
-							<span class="card-title txt-blue">
-								{{ movie.title }}
-							</span>
+							<span class="card-title txt-blue"></span>
 						</div>
 					</a>
 				</div>
@@ -45,8 +45,6 @@ export class DashboardComponent implements OnInit {
 	}
 
 	getMovieImage(poster_path: string) {
-		let path = this._movieService.renderPoster(poster_path);
-		console.log(path);
-		return path;
+		return this._movieService.renderPoster(poster_path);
 	}
 }
