@@ -4,7 +4,7 @@ import {Http, HTTP_PROVIDERS} from 'angular2/http';
 
 import {HeaderComponent} from './header.component';
 import {DashboardComponent} from './dashboard.component';
-import {MovieComponent} from './movie.component';
+import {MovieComponent} from './movie/movie.component';
 
 import {MovieService} from '../services/movie.service';
 
@@ -14,6 +14,7 @@ import {MovieService} from '../services/movie.service';
 	providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, MovieService],
 	template: `
 		<header></header>
+		<breadcrumb></breadcrumb>
 		<router-outlet></router-outlet>
 	`
 })

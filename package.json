@@ -15,8 +15,11 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^6.3.3",
     "concurrently": "^2.0.0",
     "lite-server": "^2.1.0",
+    "postcss": "^5.0.19",
+    "postcss-cli": "^2.5.1",
     "typescript": "^1.8.7",
     "typings": "^0.7.7"
   },
