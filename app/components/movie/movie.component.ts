@@ -14,6 +14,8 @@ declare var $:any;
 export class MovieComponent implements OnInit, AfterViewInit {
 	public movie: any;
 
+	public loading = true;
+
 	constructor(
 		private _movieService: MovieService,
 		private _routeParams: RouteParams,
@@ -28,9 +30,10 @@ export class MovieComponent implements OnInit, AfterViewInit {
 	ngOnInit() {
 		let id = +this._routeParams.get('id');
 
-		this._movieService.getMovie(id)
+		this._movieService.getMovie(id, 'images,videos')
 			.then(movie => {
 				this.movie = movie.json();
+				this.loading = false;
 			})
 			.catch(err => {
 				this._router.navigate(['Dashboard']);
@@ -38,7 +41,15 @@ export class MovieComponent implements OnInit, AfterViewInit {
 	}
 
 	getMovieImage(poster_path: string) {
-		return this._movieService.renderPoster(poster_path);
+		return this._movieService.renderImage(poster_path);
+	}
+
+	getMovieBackdrop(poster_path: string) {
+		return this._movieService.renderImage(poster_path, 'backdrop');
+	}
+
+	getMovieVideo(key: string) {
+		return this._movieService.renderVideo(key);
 	}
 
 }

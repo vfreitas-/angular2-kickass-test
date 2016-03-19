@@ -45,6 +45,6 @@ export class DashboardComponent implements OnInit {
 	}
 
 	getMovieImage(poster_path: string) {
-		return this._movieService.renderPoster(poster_path);
+		return this._movieService.renderImage(poster_path);
 	}
 }

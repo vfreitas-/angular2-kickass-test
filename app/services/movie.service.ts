@@ -12,7 +12,8 @@ export class MovieService {
 
 	public config = {
 		base_url: '',
-		poster_sizes: []
+		poster_sizes: [],
+		backdrop_sizes: []
 	};
 
 	constructor(private _http: Http) {
@@ -36,6 +37,7 @@ export class MovieService {
 				let data = result.json();
 				this.config.base_url = data.images.base_url;
 				this.config.poster_sizes = data.images.poster_sizes;
+				this.config.backdrop_sizes = data.images.backdrop_sizes;
 			});
 	}
 
@@ -44,12 +46,40 @@ export class MovieService {
 			.toPromise();
 	}
 
-	getMovie(id: number) {
+	getMovie(id: number, append: string = '') {
+		if(append) this.req_options.search.set('append_to_response', append);
+
 		return this._http.get(`${this.url}/movie/${id}`, this.req_options)
 			.toPromise();
 	}
 
-	renderPoster(poster_path: string) {
-		return `${this.config.base_url}${this.config.poster_sizes[3]}${poster_path}`;
+	getMovieImages(id: number) {
+		return this._http.get(`${this.url}/movie/${id}/images`, this.req_options)
+			.toPromise();
+	}
+
+	getMovieVideos(id: number) {
+		return this._http.get(`${this.url}/movie/${id}/videos`, this.req_options)
+			.toPromise();
+	}
+
+	renderImage(path: string, type: string = 'poster', size: number = null) {
+		let key, poster;
+
+		switch(type) {
+			case 'poster': {
+				key = size || 3;
+				poster = this.config.poster_sizes[key];
+			}
+			case 'backdrop': {
+				key = size || 0;
+				poster = this.config.backdrop_sizes[key];
+			}
+		}
+		return `${this.config.base_url}${poster}${path}`;
+	}
+
+	renderVideo(key: string) {
+		return `https://www.youtube.com/embed/${key}`;
 	}
 }

@@ -1,6 +1,16 @@
-<breacrumb>
+<breadcrumb *ngIf="movie">
 	<a [routerLink]="['Dashboard']" class="breadcrumb">Dashboard</a>
-</breacrumb>
+	<a class="breadcrumb">Movie</a>
+	<a class="breadcrumb">{{ movie.title }}</a>
+</breadcrumb>
+
+<div class="row" style="margin-top: 20px;">
+	<div *ngIf="loading" class="col s8 offset-s2">
+		<div class="progress">
+			<div class="indeterminate"></div>
+		</div>
+	</div>
+</div>
 
 <div *ngIf="movie" class="container">
 	<div class="row">
@@ -14,7 +24,6 @@
 			<div class="card">
 				<div class="card-image">
 					<img [src]="getMovieImage(movie.poster_path)">
-	                <!-- <span class="card-title">Card Title</span> -->
 				</div>
 				<div class="card-content">
 					<b style="font-size: 1.5rem">
@@ -29,13 +38,27 @@
 				 <div class="card-content">
 					<span class="card-title">Description</span>
 					<p>{{ movie.overview }}</p>
-					<div style="padding: 1rem;display:flex;justify-content:space-between">
-						<div *ngFor="#genre of movie.genres" class="chip">
+					<div style="padding: 1rem;display:flex;justify-content:flex-start;">
+						<div *ngFor="#genre of movie.genres" class="chip" style="margin-right: 10px;">
 							{{ genre.name }}
 						</div>
 					</div>
 				 </div>
 			</div>
+		</div>
+	</div>
+	<div class="row" *ngIf="movie.videos">
+		<h5>Videos</h5>
+		<div class="col s12 m8 offset-m2" *ngFor="#video of movie.videos.results">
+			<div class="video-container">
+				<iframe width="560" height="315" [src]="getMovieVideo(video.key)" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+	<div class="row" *ngIf="movie.images">
+		<h5>Gallery</h5>
+		<div class="col s3" *ngFor="#backdrop of movie.images.backdrops">
+			<img [src]="getMovieBackdrop(backdrop.file_path)"/>
 		</div>
 	</div>
 </div>
