@@ -1,8 +1,10 @@
-import {Component, ElementRef, OnInit, AfterViewInit} from 'angular2/core';
+import {Component, ElementRef, OnInit, AfterViewChecked} from 'angular2/core';
 import {RouteParams, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {MovieService} from '../../services/movie.service';
 import {BreadcrumbComponent} from '../breadcrumb/breadcrumb.component';
+
+import {DateHelper} from '../../helpers/date';
 
 declare var $:any;
 
@@ -11,20 +13,29 @@ declare var $:any;
 	directives: [ROUTER_DIRECTIVES, BreadcrumbComponent],
 	templateUrl: 'app/components/movie/movie.html'
 })
-export class MovieComponent implements OnInit, AfterViewInit {
+export class MovieComponent implements OnInit, AfterViewChecked {
 	public movie: any;
 
 	public loading = true;
+
+	public tabsLoaded = false;
 
 	constructor(
 		private _movieService: MovieService,
 		private _routeParams: RouteParams,
 		private _router: Router,
+		private _dateHelper: DateHelper,
 		private el: ElementRef
 	) {}
 
-	ngAfterViewInit() {
-		console.log($(this.el.nativeElement));
+	ngAfterViewChecked() {
+		if( $(this.el.nativeElement).find('#tabs-movies').children().length > 0 &&
+		!this.tabsLoaded) {
+			console.log($(this.el.nativeElement).find('#tabs-movies').children());
+
+			$(this.el.nativeElement).find('#tabs-movies').tabs();
+			this.tabsLoaded = true;
+		}
 	}
 
 	ngOnInit() {
@@ -50,6 +61,14 @@ export class MovieComponent implements OnInit, AfterViewInit {
 
 	getMovieVideo(key: string) {
 		return this._movieService.renderVideo(key);
+	}
+
+	parseDate(date: any) {
+		return this._dateHelper.parseRobust(date);
+	}
+
+	parseRunTime(date: any) {
+		return this._dateHelper.parseMinToHour(date);
 	}
 
 }

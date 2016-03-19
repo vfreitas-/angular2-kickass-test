@@ -8,10 +8,12 @@ import {MovieComponent} from './movie/movie.component';
 
 import {MovieService} from '../services/movie.service';
 
+import {DateHelper} from '../helpers/date';
+
 @Component({
 	selector: 'app',
 	directives: [ROUTER_DIRECTIVES, HeaderComponent],
-	providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, MovieService],
+	providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, MovieService, DateHelper],
 	template: `
 		<header></header>
 		<breadcrumb></breadcrumb>
