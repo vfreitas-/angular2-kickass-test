@@ -67,14 +67,15 @@ export class MovieService {
 		let key, poster;
 
 		switch(type) {
-			case 'poster': {
+			case 'poster':
 				key = size || 3;
 				poster = this.config.poster_sizes[key];
-			}
-			case 'backdrop': {
+				break;
+
+			case 'backdrop':
 				key = size || 0;
 				poster = this.config.backdrop_sizes[key];
-			}
+				break;
 		}
 		return `${this.config.base_url}${poster}${path}`;
 	}

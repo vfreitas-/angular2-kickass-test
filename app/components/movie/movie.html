@@ -23,7 +23,7 @@
 		<div class="col s10 offset-s1 m3">
 			<div class="card">
 				<div class="card-image">
-					<img [src]="getMovieImage(movie.poster_path)">
+					<img [src]="movie.poster_path | imageRender">
 				</div>
 				<div class="card-content">
 					<b style="font-size: 1.5rem">
@@ -58,11 +58,6 @@
 	</div>
 	<div class="row" *ngIf="movie.videos">
 		<h5>Videos</h5>
-		<!-- <div class="col s12 m8 offset-m2" *ngFor="#video of movie.videos.results">
-			<div class="video-container">
-				<iframe width="560" height="315" [src]="getMovieVideo(video.key)" frameborder="0" allowfullscreen></iframe>
-			</div>
-		</div> -->
 		<div class="row">
 			<div class="col s12">
 				<ul id="tabs-movies" class="tabs">
@@ -82,7 +77,7 @@
 	<div class="row" *ngIf="movie.images">
 		<h5>Gallery</h5>
 		<div class="col s3" *ngFor="#backdrop of movie.images.backdrops">
-			<img [src]="getMovieBackdrop(backdrop.file_path)" style="max-width: 100%;"/>
+			<img [src]="backdrop.file_path | imageRender:'backdrop'" style="max-width: 100%;"/>
 		</div>
 	</div>
 </div>

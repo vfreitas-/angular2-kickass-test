@@ -4,16 +4,11 @@ import {RouteParams, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {MovieService} from '../../services/movie.service';
 import {BreadcrumbComponent} from '../breadcrumb/breadcrumb.component';
 
-import {DateHelper} from '../../helpers/date';
-
-import {MomentPipe} from '../../pipes/moment.pipe';
-
 declare var $:any;
 
 @Component({
 	selector: 'movie',
 	directives: [ROUTER_DIRECTIVES, BreadcrumbComponent],
-	pipes: [MomentPipe],
 	templateUrl: 'app/components/movie/movie.html'
 })
 export class MovieComponent implements OnInit, AfterViewChecked {
@@ -27,7 +22,6 @@ export class MovieComponent implements OnInit, AfterViewChecked {
 		private _movieService: MovieService,
 		private _routeParams: RouteParams,
 		private _router: Router,
-		private _dateHelper: DateHelper,
 		private el: ElementRef
 	) {}
 
@@ -39,6 +33,7 @@ export class MovieComponent implements OnInit, AfterViewChecked {
 			$(this.el.nativeElement).find('#tabs-movies').tabs();
 			this.tabsLoaded = true;
 		}
+
 	}
 
 	ngOnInit() {
@@ -54,24 +49,7 @@ export class MovieComponent implements OnInit, AfterViewChecked {
 			});
 	}
 
-	getMovieImage(poster_path: string) {
-		return this._movieService.renderImage(poster_path);
-	}
-
-	getMovieBackdrop(poster_path: string) {
-		return this._movieService.renderImage(poster_path, 'backdrop');
-	}
-
 	getMovieVideo(key: string) {
 		return this._movieService.renderVideo(key);
 	}
-
-	parseDate(date: any) {
-		return this._dateHelper.parseRobust(date);
-	}
-
-	parseRunTime(date: any) {
-		return this._dateHelper.parseMinToHour(date);
-	}
-
 }

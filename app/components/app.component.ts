@@ -3,17 +3,15 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
 
 import {HeaderComponent} from './header.component';
-import {DashboardComponent} from './dashboard.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 import {MovieComponent} from './movie/movie.component';
 
 import {MovieService} from '../services/movie.service';
 
-import {DateHelper} from '../helpers/date';
-
 @Component({
 	selector: 'app',
 	directives: [ROUTER_DIRECTIVES, HeaderComponent],
-	providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, MovieService, DateHelper],
+	providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, MovieService],
 	template: `
 		<header></header>
 		<breadcrumb></breadcrumb>
