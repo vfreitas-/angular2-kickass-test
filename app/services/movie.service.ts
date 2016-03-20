@@ -41,8 +41,8 @@ export class MovieService {
 			});
 	}
 
-	getPopularMovies() {
-		return this._http.get(`${this.url}/movie/popular`, this.req_options)
+	getMovies(type: string) {
+		return this._http.get(`${this.url}/movie/${type}`, this.req_options)
 			.toPromise();
 	}
 
