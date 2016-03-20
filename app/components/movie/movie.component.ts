@@ -6,11 +6,14 @@ import {BreadcrumbComponent} from '../breadcrumb/breadcrumb.component';
 
 import {DateHelper} from '../../helpers/date';
 
+import {MomentPipe} from '../../pipes/moment.pipe';
+
 declare var $:any;
 
 @Component({
 	selector: 'movie',
 	directives: [ROUTER_DIRECTIVES, BreadcrumbComponent],
+	pipes: [MomentPipe],
 	templateUrl: 'app/components/movie/movie.html'
 })
 export class MovieComponent implements OnInit, AfterViewChecked {
