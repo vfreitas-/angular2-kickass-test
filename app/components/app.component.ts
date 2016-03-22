@@ -6,7 +6,7 @@ import {HeaderComponent} from './header.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {MovieComponent} from './movie/movie.component';
 
-import {MovieService} from '../services/movie.service';
+import {MovieService} from '../services/tmdb/movie.service';
 
 @Component({
 	selector: 'app',

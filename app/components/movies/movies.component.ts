@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
-import {MovieService} from '../../services/movie.service';
+import {MovieService} from '../../services/tmdb/movie.service';
 
 @Component({
 	selector: 'movies',

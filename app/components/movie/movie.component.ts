@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, AfterViewChecked} from 'angular2/core';
 import {RouteParams, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
-import {MovieService} from '../../services/movie.service';
+import {MovieService} from '../../services/tmdb/movie.service';
 import {BreadcrumbComponent} from '../breadcrumb/breadcrumb.component';
 
 declare var $:any;
@@ -28,8 +28,6 @@ export class MovieComponent implements OnInit, AfterViewChecked {
 	ngAfterViewChecked() {
 		if( $(this.el.nativeElement).find('#tabs-movies').children().length > 0 &&
 		!this.tabsLoaded) {
-			console.log($(this.el.nativeElement).find('#tabs-movies').children());
-
 			$(this.el.nativeElement).find('#tabs-movies').tabs();
 			this.tabsLoaded = true;
 		}

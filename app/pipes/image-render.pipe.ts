@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 
-import {MovieService} from '../services/movie.service';
+import {MovieService} from '../services/tmdb/movie.service';
 
 @Pipe({
 	name: 'imageRender'

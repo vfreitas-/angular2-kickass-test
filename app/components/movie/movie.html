@@ -38,8 +38,8 @@
 				 <div class="card-content">
 					<span class="card-title">Description</span>
 					<p>{{ movie.overview }}</p>
-					<div style="padding: 1rem;display:flex;justify-content:flex-start;">
-						<div *ngFor="#genre of movie.genres" class="chip" style="margin-right: 10px;">
+					<div style="padding: 1rem;display:flex;justify-content:flex-start;flex-wrap:wrap;">
+						<div *ngFor="#genre of movie.genres" class="chip" style="margin-right: 10px;margin-bottom:10px">
 							{{ genre.name }}
 						</div>
 					</div>
@@ -52,6 +52,7 @@
 				 </div>
 				 <div class="card-action">
 					 <a href="{{ movie.homepage }}" target="_blank">Website</a>
+					 <a href="http://www.imdb.com/title/{{ movie.imdb_id }}" target="_blank">IMDB</a>
 				 </div>
 			</div>
 		</div>
