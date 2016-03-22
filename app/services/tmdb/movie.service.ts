@@ -35,6 +35,8 @@ export class MovieService extends BaseService {
 	renderImage(path: string, type: string = 'poster', size: number = null) {
 		let key, poster;
 
+		if(!path) return '/assets/images/No_Poster.png';
+
 		switch(type) {
 			case 'poster':
 				key = size || 3;

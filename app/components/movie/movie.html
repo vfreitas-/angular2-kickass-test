@@ -78,7 +78,7 @@
 	<div class="row" *ngIf="movie.images">
 		<h5>Gallery</h5>
 		<div class="col s3" *ngFor="#backdrop of movie.images.backdrops">
-			<img [src]="backdrop.file_path | imageRender:'backdrop'" style="max-width: 100%;"/>
+			<img [src]="backdrop.file_path | imageRender:'backdrop'" material-box style="max-width: 100%;"/>
 		</div>
 	</div>
 </div>
