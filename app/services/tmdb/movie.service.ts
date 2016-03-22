@@ -6,42 +6,9 @@ import {BaseService} from './base.service';
 @Injectable()
 export class MovieService extends BaseService {
 
-	public url = 'http://api.themoviedb.org/3';
-	public apiKey = 'f289cf4b2326937e41e44f35b992964e';
-	public req_options: RequestOptions;
-	public params: URLSearchParams;
-
-	// public config = {
-	// 	base_url: '',
-	// 	poster_sizes: [],
-	// 	backdrop_sizes: []
-	// };
-
-	constructor(private _http: Http) {
-		super(_http);
-		// this.params = new URLSearchParams();
-		// this.params.set('api_key', this.apiKey);
-		//
-		// let headers = new Headers({});
-		//
-		// this.req_options = new RequestOptions({
-		// 	headers: headers,
-		// 	search: this.params
-		// });
-		//
-		// this.getConfiguration();
+	constructor(http: Http) {
+		super(http);
 	}
-
-	// getConfiguration() {
-	// 	this._http.get(`${this.url}/configuration`, this.req_options)
-	// 		.toPromise()
-	// 		.then(result => {
-	// 			let data = result.json();
-	// 			this.config.base_url = data.images.base_url;
-	// 			this.config.poster_sizes = data.images.poster_sizes;
-	// 			this.config.backdrop_sizes = data.images.backdrop_sizes;
-	// 		});
-	// }
 
 	getMovies(type: string) {
 		return this._http.get(`${this.url}/movie/${type}`, this.req_options)
@@ -76,10 +43,10 @@ export class MovieService extends BaseService {
 
 			case 'backdrop':
 				key = size || 0;
-				poster = this.config.backdrop_sizes[key];
+				poster = this.config.images.backdrop_sizes[key];
 				break;
 		}
-		return `${this.config.base_url}${poster}${path}`;
+		return `${this.config.images.base_url}${poster}${path}`;
 	}
 
 	renderVideo(key: string) {

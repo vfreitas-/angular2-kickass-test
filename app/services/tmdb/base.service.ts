@@ -10,10 +10,14 @@ export abstract class BaseService {
 	protected params: URLSearchParams;
 
 	protected config = {
-		images: {}
+		images: {
+			base_url: '',
+			poster_sizes: [],
+			backdrop_sizes: []
+		}
 	};
 
-	constructor(private _http: Http) {
+	constructor(protected _http: Http) {
 		this.params = new URLSearchParams();
 		this.params.set('api_key', this.apiKey);
 
