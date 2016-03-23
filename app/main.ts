@@ -7,6 +7,7 @@ import {AppComponent} from './components/app.component';
 
 import {MomentPipe} from './pipes/moment.pipe';
 import {ImageRenderPipe} from './pipes/image-render.pipe';
+import {YoutubeEmbedPipe} from './pipes/youtube-embed.pipe';
 
 import {AutoFocusDirective} from './directives/auto-focus.directive';
 import {MaterialBoxDirective} from './directives/materialbox.directive';
@@ -14,10 +15,10 @@ import {MaterialBoxDirective} from './directives/materialbox.directive';
 //register our pipes in the global pipes
 bootstrap(AppComponent, [
 	provide(PLATFORM_PIPES, {
-		useValue: [MomentPipe, ImageRenderPipe],
+		useValue: [MomentPipe, ImageRenderPipe, YoutubeEmbedPipe],
 		multi: true
 	}),
 	provide(PLATFORM_DIRECTIVES, {
-		useValue: [AutoFocusDirective, MaterialBoxDirective], 
+		useValue: [AutoFocusDirective, MaterialBoxDirective],
 		multi: true})
 ]);

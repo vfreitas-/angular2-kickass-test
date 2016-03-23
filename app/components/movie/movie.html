@@ -70,7 +70,7 @@
 			<div *ngFor="#video of movie.videos.results" id="{{ video.key }}"
 			class="col s12">
 				<div class="video-container">
-					<iframe height="315" [src]="getMovieVideo(video.key)" frameborder="0" allowfullscreen></iframe>
+					<iframe height="315" [src]="video.key | youtube" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>
 		</div>

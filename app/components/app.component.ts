@@ -7,11 +7,20 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {MovieComponent} from './movie/movie.component';
 
 import {MovieService} from '../services/tmdb/movie.service';
+import {MediaService} from '../services/tmdb/media.service';
+import {ConfigurationService} from '../services/tmdb/configuration.service';
+
 
 @Component({
 	selector: 'app',
 	directives: [ROUTER_DIRECTIVES, HeaderComponent],
-	providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, MovieService],
+	providers: [
+		ROUTER_PROVIDERS,
+		HTTP_PROVIDERS,
+		ConfigurationService,
+		MovieService,
+		MediaService
+	],
 	template: `
 		<header></header>
 		<breadcrumb></breadcrumb>

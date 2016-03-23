@@ -37,7 +37,7 @@ export class MovieComponent implements OnInit, AfterViewChecked {
 	ngOnInit() {
 		let id = +this._routeParams.get('id');
 
-		this._movieService.getMovie(id, 'images,videos')
+		this._movieService.getMovie(id, 'images,videos,similar')
 			.then(movie => {
 				this.movie = movie.json();
 				this.loading = false;
@@ -45,9 +45,5 @@ export class MovieComponent implements OnInit, AfterViewChecked {
 			.catch(err => {
 				this._router.navigate(['Dashboard']);
 			});
-	}
-
-	getMovieVideo(key: string) {
-		return this._movieService.renderVideo(key);
 	}
 }

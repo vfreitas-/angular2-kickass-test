@@ -4,8 +4,11 @@ import {env} from '../../env';
 
 export abstract class BaseService {
 
- 	protected url = env.TMDB_URL;
-	protected apiKey = env.TMDB_KEY;
+ 	protected baseUrl: string = env.TMDB_URL;
+	protected resource: string;
+	
+	protected apiKey: string = env.TMDB_KEY;
+
 	protected req_options: RequestOptions;
 	protected params: URLSearchParams;
 
@@ -32,12 +35,16 @@ export abstract class BaseService {
 	}
 
 	getConfiguration() {
-		this._http.get(`${this.url}/configuration`, this.req_options)
+		this._http.get(`${this.baseUrl}/configuration`, this.req_options)
 			.toPromise()
 			.then(result => {
 				let data = result.json();
 				this.config.images = data.images;
 			});
+	}
+
+	getEndpoint() {
+		return `${this.baseUrl}/${this.resource}`;
 	}
 
 }
