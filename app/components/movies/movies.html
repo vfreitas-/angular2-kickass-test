@@ -1,17 +1,17 @@
 <div class="row">
-	<div *ngIf="loading" class="col s8 offset-s2">
-		<div class="progress">
-			<div class="indeterminate"></div>
-		</div>
-	</div>
-	<div class="col s4 m3 l2" *ngFor="#movie of movies">
-		<div class="card blue">
-			<a [routerLink]="['Movie', {id: movie.id}]">
-				<div class="card-image">
-					<img [src]="movie.poster_path | imageRender"/>
-					<span class="card-title txt-blue"></span>
-				</div>
-			</a>
-		</div>
-	</div>
+    <div *ngIf="loading" class="col s8 offset-s2">
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+    <div class="col s4 m3 l2" *ngFor="#movie of movies">
+        <div class="card blue">
+            <a [routerLink]="['Movie', {id: movie.id}]">
+                <div class="card-image">
+                    <img [src]="movie.poster_path | imageRender"/>
+                    <span class="card-title txt-blue"></span>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>

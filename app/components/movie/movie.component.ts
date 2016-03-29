@@ -7,43 +7,43 @@ import {BreadcrumbComponent} from '../breadcrumb/breadcrumb.component';
 declare var $:any;
 
 @Component({
-	selector: 'movie',
-	directives: [ROUTER_DIRECTIVES, BreadcrumbComponent],
-	templateUrl: 'app/components/movie/movie.html'
+    selector: 'movie',
+    directives: [ROUTER_DIRECTIVES, BreadcrumbComponent],
+    templateUrl: 'app/components/movie/movie.html'
 })
 export class MovieComponent implements OnInit, AfterViewChecked {
-	public movie: any;
+    public movie: any;
 
-	public loading = true;
+    public loading = true;
 
-	public tabsLoaded = false;
+    public tabsLoaded = false;
 
-	constructor(
-		private _movieService: MovieService,
-		private _routeParams: RouteParams,
-		private _router: Router,
-		private el: ElementRef
-	) {}
+    constructor(
+        private _movieService: MovieService,
+        private _routeParams: RouteParams,
+        private _router: Router,
+        private el: ElementRef
+    ) {}
 
-	ngAfterViewChecked() {
-		if( $(this.el.nativeElement).find('#tabs-movies').children().length > 0 &&
-		!this.tabsLoaded) {
-			$(this.el.nativeElement).find('#tabs-movies').tabs();
-			this.tabsLoaded = true;
-		}
+    ngAfterViewChecked() {
+        if( $(this.el.nativeElement).find('#tabs-movies').children().length > 0 &&
+        !this.tabsLoaded) {
+            $(this.el.nativeElement).find('#tabs-movies').tabs();
+            this.tabsLoaded = true;
+        }
 
-	}
+    }
 
-	ngOnInit() {
-		let id = +this._routeParams.get('id');
+    ngOnInit() {
+        let id = +this._routeParams.get('id');
 
-		this._movieService.getMovie(id, 'images,videos,similar')
-			.then(movie => {
-				this.movie = movie.json();
-				this.loading = false;
-			})
-			.catch(err => {
-				this._router.navigate(['Dashboard']);
-			});
-	}
+        this._movieService.getMovie(id, 'images,videos,similar')
+        .then(movie => {
+            this.movie = movie.json();
+            this.loading = false;
+        })
+        .catch(err => {
+            this._router.navigate(['Dashboard']);
+        });
+    }
 }

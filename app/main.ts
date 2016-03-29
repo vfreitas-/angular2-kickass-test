@@ -14,11 +14,11 @@ import {MaterialBoxDirective} from './directives/materialbox.directive';
 
 //register our pipes in the global pipes
 bootstrap(AppComponent, [
-	provide(PLATFORM_PIPES, {
-		useValue: [MomentPipe, ImageRenderPipe, YoutubeEmbedPipe],
-		multi: true
-	}),
-	provide(PLATFORM_DIRECTIVES, {
-		useValue: [AutoFocusDirective, MaterialBoxDirective],
-		multi: true})
-]);
+    provide(PLATFORM_PIPES, {
+        useValue: [MomentPipe, ImageRenderPipe, YoutubeEmbedPipe],
+        multi: true
+    }),
+    provide(PLATFORM_DIRECTIVES, {
+        useValue: [AutoFocusDirective, MaterialBoxDirective],
+        multi: true})
+    ]);

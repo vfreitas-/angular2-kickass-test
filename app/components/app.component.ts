@@ -12,32 +12,32 @@ import {ConfigurationService} from '../services/tmdb/configuration.service';
 
 
 @Component({
-	selector: 'app',
-	directives: [ROUTER_DIRECTIVES, HeaderComponent],
-	providers: [
-		ROUTER_PROVIDERS,
-		HTTP_PROVIDERS,
-		ConfigurationService,
-		MovieService,
-		MediaService
-	],
-	template: `
-		<header></header>
-		<breadcrumb></breadcrumb>
-		<router-outlet></router-outlet>
-	`
+    selector: 'app',
+    directives: [ROUTER_DIRECTIVES, HeaderComponent],
+    providers: [
+        ROUTER_PROVIDERS,
+        HTTP_PROVIDERS,
+        ConfigurationService,
+        MovieService,
+        MediaService
+    ],
+    template: `
+    <header></header>
+    <breadcrumb></breadcrumb>
+    <router-outlet></router-outlet>
+    `
 })
 @RouteConfig([
-	{
-		path: '/',
-		name: 'Dashboard',
-		component: DashboardComponent
-	},
-	{
-		path: '/movie/:id',
-		name: 'Movie',
-		component: MovieComponent
-	}
+    {
+        path: '/',
+        name: 'Dashboard',
+        component: DashboardComponent
+    },
+    {
+        path: '/movie/:id',
+        name: 'Movie',
+        component: MovieComponent
+    }
 ])
 export class AppComponent {
 

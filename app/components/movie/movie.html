@@ -1,84 +1,84 @@
 <breadcrumb *ngIf="movie">
-	<a [routerLink]="['Dashboard']" class="breadcrumb">Dashboard</a>
-	<a class="breadcrumb">Movie</a>
-	<a class="breadcrumb">{{ movie.title }}</a>
+    <a [routerLink]="['Dashboard']" class="breadcrumb">Dashboard</a>
+    <a class="breadcrumb">Movie</a>
+    <a class="breadcrumb">{{ movie.title }}</a>
 </breadcrumb>
 
 <div class="row" style="margin-top: 20px;">
-	<div *ngIf="loading" class="col s8 offset-s2">
-		<div class="progress">
-			<div class="indeterminate"></div>
-		</div>
-	</div>
+    <div *ngIf="loading" class="col s8 offset-s2">
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="movie" class="container">
-	<div class="row">
-		<div class="col s12">
-			<h3>{{ movie.title }} ({{ movie.release_date | moment:"Year" }})</h3>
-			<h5>{{ movie.tagline }}</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col s10 offset-s1 m3">
-			<div class="card">
-				<div class="card-image">
-					<img [src]="movie.poster_path | imageRender">
-				</div>
-				<div class="card-content">
-					<b style="font-size: 1.5rem">
-						{{ movie.vote_average }}
-					</b>
-					<i class="material-icons" style="font-size: 1.5rem">grade</i>
-				</div>
-			</div>
-		</div>
-		<div class="col s12 m9">
-			<div class="card hoverable">
-				 <div class="card-content">
-					<span class="card-title">Description</span>
-					<p>{{ movie.overview }}</p>
-					<div style="padding: 1rem;display:flex;justify-content:flex-start;flex-wrap:wrap;">
-						<div *ngFor="#genre of movie.genres" class="chip" style="margin-right: 10px;margin-bottom:10px">
-							{{ genre.name }}
-						</div>
-					</div>
-					<div style="padding: 1rem;display:flex;justify-content:flex-start;flex-direction: column">
-						<p><b>Release Date: </b> {{ movie.release_date | moment:"Robust" }}</p>
-						<p><b>Runtime: </b>{{ movie.runtime | moment:"MinToHour" }}</p>
-						<p><b>Budget: </b> {{ movie.budget | currency }}</p>
-						<p><b>Revenue: </b> {{ movie.revenue | currency }}</p>
-					</div>
-				 </div>
-				 <div class="card-action">
-					 <a href="{{ movie.homepage }}" target="_blank">Website</a>
-					 <a href="http://www.imdb.com/title/{{ movie.imdb_id }}" target="_blank">IMDB</a>
-				 </div>
-			</div>
-		</div>
-	</div>
-	<div class="row" *ngIf="movie.videos">
-		<h5>Videos</h5>
-		<div class="row">
-			<div class="col s12">
-				<ul id="tabs-movies" class="tabs">
-					<li class="tab col s3" *ngFor="#video of movie.videos.results">
-						<a href="#{{ video.key }}">{{ video.name }}</a>
-					</li>
-				</ul>
-			</div>
-			<div *ngFor="#video of movie.videos.results" id="{{ video.key }}"
-			class="col s12">
-				<div class="video-container">
-					<iframe height="315" [src]="video.key | youtube" frameborder="0" allowfullscreen></iframe>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row" *ngIf="movie.images">
-		<h5>Gallery</h5>
-		<div class="col s3" *ngFor="#backdrop of movie.images.backdrops">
-			<img [src]="backdrop.file_path | imageRender:'backdrop'" material-box style="max-width: 100%;"/>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col s12">
+            <h3>{{ movie.title }} ({{ movie.release_date | moment:"Year" }})</h3>
+            <h5>{{ movie.tagline }}</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s10 offset-s1 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img [src]="movie.poster_path | imageRender">
+                </div>
+                <div class="card-content">
+                    <b style="font-size: 1.5rem">
+                        {{ movie.vote_average }}
+                    </b>
+                    <i class="material-icons" style="font-size: 1.5rem">grade</i>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m9">
+            <div class="card hoverable">
+                <div class="card-content">
+                    <span class="card-title">Description</span>
+                    <p>{{ movie.overview }}</p>
+                    <div style="padding: 1rem;display:flex;justify-content:flex-start;flex-wrap:wrap;">
+                        <div *ngFor="#genre of movie.genres" class="chip" style="margin-right: 10px;margin-bottom:10px">
+                            {{ genre.name }}
+                        </div>
+                    </div>
+                    <div style="padding: 1rem;display:flex;justify-content:flex-start;flex-direction: column">
+                        <p><b>Release Date: </b> {{ movie.release_date | moment:"Robust" }}</p>
+                        <p><b>Runtime: </b>{{ movie.runtime | moment:"MinToHour" }}</p>
+                        <p><b>Budget: </b> {{ movie.budget | currency }}</p>
+                        <p><b>Revenue: </b> {{ movie.revenue | currency }}</p>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <a href="{{ movie.homepage }}" target="_blank">Website</a>
+                    <a href="http://www.imdb.com/title/{{ movie.imdb_id }}" target="_blank">IMDB</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="movie.videos">
+        <h5>Videos</h5>
+        <div class="row">
+            <div class="col s12">
+                <ul id="tabs-movies" class="tabs">
+                    <li class="tab col s3" *ngFor="#video of movie.videos.results">
+                        <a href="#{{ video.key }}">{{ video.name }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div *ngFor="#video of movie.videos.results" id="{{ video.key }}"
+            class="col s12">
+            <div class="video-container">
+                <iframe height="315" [src]="video.key | youtube" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="movie.images">
+    <h5>Gallery</h5>
+    <div class="col s3" *ngFor="#backdrop of movie.images.backdrops">
+        <img [src]="backdrop.file_path | imageRender:'backdrop'" material-box style="max-width: 100%;"/>
+    </div>
+</div>
 </div>

@@ -6,18 +6,18 @@ import {BaseService} from './base.service';
 @Injectable()
 export class ConfigurationService extends BaseService {
 
-	protected resource = 'configuration';
+    protected resource = 'configuration';
 
-	constructor(http: Http) {
-		super(http);
-	}
+    constructor(http: Http) {
+        super(http);
+    }
 
-	getConfiguration() {
-		this._http.get(`${this.getEndpoint()}`, this.req_options)
-			.toPromise()
-			.then(result => {
-				let data = result.json();
-				//this.config.images = data.images;
-			});
-	}
+    getConfiguration() {
+        this._http.get(`${this.getEndpoint()}`, this.req_options)
+        .toPromise()
+        .then(result => {
+            let data = result.json();
+            //this.config.images = data.images;
+        });
+    }
 }
