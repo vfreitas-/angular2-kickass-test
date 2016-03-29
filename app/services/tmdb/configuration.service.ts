@@ -13,11 +13,11 @@ export class ConfigurationService extends BaseService {
 	}
 
 	getConfiguration() {
-		this._http.get(`${this.baseUrl}/configuration`, this.req_options)
+		this._http.get(`${this.getEndpoint()}`, this.req_options)
 			.toPromise()
 			.then(result => {
 				let data = result.json();
-				this.config.images = data.images;
+				//this.config.images = data.images;
 			});
 	}
 }

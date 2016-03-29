@@ -17,6 +17,10 @@
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "concurrently": "^2.0.0",
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-jasmine": "^0.3.8",
     "lite-server": "^2.1.0",
     "postcss": "^5.0.19",
     "postcss-cli": "^2.5.1",

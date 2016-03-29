@@ -6,19 +6,11 @@ export abstract class BaseService {
 
  	protected baseUrl: string = env.TMDB_URL;
 	protected resource: string;
-	
+
 	protected apiKey: string = env.TMDB_KEY;
 
 	protected req_options: RequestOptions;
 	protected params: URLSearchParams;
-
-	protected config = {
-		images: {
-			base_url: '',
-			poster_sizes: [],
-			backdrop_sizes: []
-		}
-	};
 
 	constructor(protected _http: Http) {
 		this.params = new URLSearchParams();
@@ -30,17 +22,6 @@ export abstract class BaseService {
 			headers: headers,
 			search: this.params
 		});
-
-		this.getConfiguration();
-	}
-
-	getConfiguration() {
-		this._http.get(`${this.baseUrl}/configuration`, this.req_options)
-			.toPromise()
-			.then(result => {
-				let data = result.json();
-				this.config.images = data.images;
-			});
 	}
 
 	getEndpoint() {
